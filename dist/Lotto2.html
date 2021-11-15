@@ -18,6 +18,7 @@
 <div class="d-flex" id="wrapper">
 
     <h1 id="HB"> IW Code </h1>
+
     <!-- Sidebar-->
     <div class="border-end bg-white" id="sidebar-wrapper">
         <div class="sidebar-heading border-bottom bg-light"><a href="Index.html">Start Bootstrap</a></div>
@@ -59,38 +60,18 @@
         </nav>
         <!-- Page content-->
         <div class="container-fluid">
-            <h1 class="mt-4">이 페이지는 로또 페이지</h1>
+            <h1 class="mt-4">이 페이지는 로또 자판기</h1>
 
-            <button class="btn btn-primary" id="btn"> CLICK </button>>
+            <div class="input-group mb-3">
+                <input type="number" id="moneyInput" class="form-control" placeholder="얼마?" value="3000">
+                <button class="btn btn-outline-secondary mybtn" type="button">Button</button>
+            </div>
 
-            <style>
-                #resultDiv {
-                    background-color: blueviolet;
-                    display : flex;
-                }
-
-                #resultDiv > h3 { /* h3 각각에 주는거 */
-                    background-color : aqua;
-                    margin: 10px;
-                    padding: 20px;
-                    border-radius: 40px;
-                    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-                }
-            </style>
 
             <div id = "resultDiv">
 
             </div>
 
-
-<!--            <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>-->
-<!--            <p>-->
-<!--                Make sure to keep all page content within the-->
-<!--                <code>#page-content-wrapper</code>-->
-<!--                . The top navbar is optional, and just for demonstration. Just create an element with the-->
-<!--                <code>#sidebarToggle</code>-->
-<!--                ID which will toggle the menu when clicked.-->
-<!--            </p>-->
         </div>
     </div>
 </div>
@@ -102,59 +83,49 @@
 <script src="js/Lotto.js"></script>
 
 <script>
-    console.log("-------------------------------------------")
-    console.log(btn)
 
-    btn.addEventListener("click", function(event) {     //fn 은 이벤트 루프가 실행 (call back 함수)
+    const btn = document.querySelector(".mybtn")
 
-        console.log(event)
+    btn.addEventListener("click", () => {
+        console.log("button clicked..........................")
 
-        },false)
+        const money = document.querySelector("#moneyInput").value
 
+        if(money < 1000) {
+            alert("이 금액으론 못해요")
+            return
+        }
+
+        console.log(money)
+
+        const count = parseInt(money / 1000)
+
+        const resultDiv = document.querySelector("#resultDiv")
+
+        let str = ''
+
+        for (let i = 0; i < count; i++) {
+            const balls = makeLottoNum()
+
+            str += "<ul>"
+            //balls를 루프를 돌려
+            for (let j = 0; j < balls.length; j++) {
+                str += `<li>${balls[j]}</li>`
+
+            }
+
+            str += "</ul>"
+
+        }//end for
+
+        console.log("=========================")
+        console.log(str)
+
+        resultDiv.innerHTML = str
+
+    }, false)
 
 </script>
 
-
-
-<!--<script> // 2번 탐색되는 중 스크립트 실행됨-->
-<!--console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA") //-> 개발자 도구 console에 찍힘-->
-
-<!--// alert("AAAA") // 브라우저 동작 멈춤-->
-<!--</script>-->
-
-<!--<script>-->
-<!--    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBB")-->
-<!--</script>-->
-
-<!--&lt;!&ndash;    <script>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    doA()&ndash;&gt;-->
-
-<!--&lt;!&ndash;    function doA() {&ndash;&gt;-->
-<!--&lt;!&ndash;        console.log("doA")&ndash;&gt;-->
-<!--&lt;!&ndash;    }&ndash;&gt;-->
-<!--&lt;!&ndash;    </script>&ndash;&gt;-->
-
-
-
-<!--<script>-->
-
-
-<!--    function doA() {-->
-<!--        console.log("doA")-->
-<!--    }-->
-
-<!--    var zperson = {name : "aaa", age : 11}-->
-
-<!--</script>-->
-
-<!--<script>-->
-
-<!--    doA()-->
-<!--    console.log("&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;")-->
-<!--    console.log(zperson)-->
-<!--    console.log(window.zperson)-->
-
-<!--</script>-->
 </body>
 </html>
